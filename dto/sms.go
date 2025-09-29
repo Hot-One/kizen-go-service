@@ -27,6 +27,6 @@ type UpdateSms struct {
 } // @name UpdateSms
 
 type VerifySms struct {
-	Value string `json:"value" binding:"required"`
-	Code  string `json:"code" binding:"required"`
+	Id   int64  `json:"id" binding:"required" form:"id" query:"id"`
+	Code string `json:"code" binding:"required" form:"code" query:"code"`
 } // @name VerifySms

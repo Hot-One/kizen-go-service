@@ -3,7 +3,7 @@ package postgres
 import (
 	"fmt"
 
-	"github.com/Hot-One/monolith/config"
+	"github.com/Hot-One/kizen-go-service/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -12,7 +12,7 @@ type GormConfig = gorm.Config
 
 func ConnectPostgres(gormConfig *GormConfig, cfg config.Config) (*gorm.DB, error) {
 	pgConnStr := fmt.Sprintf(
-		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable TimeZone=UTC",
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable TimeZone=UTC",
 		cfg.PostgresHost,
 		cfg.PostgresPort,
 		cfg.PostgresUser,

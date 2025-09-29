@@ -10,7 +10,7 @@ type Config struct {
 	Host string
 	Port int
 
-	PosrtgresHost    string
+	PostgresHost     string
 	PostgresPort     int
 	PostgresUser     string
 	PostgresPassword string
@@ -22,7 +22,7 @@ func Load() *Config {
 		Host: cast.ToString(getOrReturnDefault("HOST", "localhost")),
 		Port: cast.ToInt(getOrReturnDefault("PORT", 8080)),
 
-		PosrtgresHost:    cast.ToString(getOrReturnDefault("POSTGRES_HOST", "localhost")),
+		PostgresHost:     cast.ToString(getOrReturnDefault("POSTGRES_HOST", "localhost")),
 		PostgresPort:     cast.ToInt(getOrReturnDefault("POSTGRES_PORT", 5432)),
 		PostgresUser:     cast.ToString(getOrReturnDefault("POSTGRES_USER", "postgres")),
 		PostgresPassword: cast.ToString(getOrReturnDefault("POSTGRES_PASSWORD", "postgres")),

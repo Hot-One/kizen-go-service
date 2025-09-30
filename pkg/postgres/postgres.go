@@ -10,7 +10,7 @@ import (
 
 type GormConfig = gorm.Config
 
-func ConnectPostgres(gormConfig *GormConfig, cfg config.Config) (*gorm.DB, error) {
+func ConnectPostgres(gormConfig *GormConfig, cfg *config.Config) (*gorm.DB, error) {
 	pgConnStr := fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable TimeZone=UTC",
 		cfg.PostgresHost,

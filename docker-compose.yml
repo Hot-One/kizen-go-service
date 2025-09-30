@@ -1,0 +1,51 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: kizen-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: kizen
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - kizen-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d kizen"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  kizen-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kizen-go-service
+    restart: unless-stopped
+    environment:
+      - SERVICE_NAME=kizen-go-service
+      - ENVIRONMENT=production
+      - HOST=0.0.0.0
+      - PORT=8080
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=kizen
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - kizen-network
+networks:
+  kizen-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local

@@ -1,2 +1,1 @@
-# kizen-go-service
-kizen-go-service
+# Kizen Go Service

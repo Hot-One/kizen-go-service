@@ -7,8 +7,10 @@ import (
 )
 
 type Config struct {
-	Host string
-	Port int
+	ServiceName string
+	Environment string
+	Host        string
+	Port        int
 
 	PostgresHost     string
 	PostgresPort     int
@@ -17,10 +19,12 @@ type Config struct {
 	PostgresDatabase string
 }
 
-func Load() *Config {
-	return &Config{
-		Host: cast.ToString(getOrReturnDefault("HOST", "localhost")),
-		Port: cast.ToInt(getOrReturnDefault("PORT", 8080)),
+func Load() Config {
+	return Config{
+		ServiceName: cast.ToString(getOrReturnDefault("SERVICE_NAME", "kizen-go-service")),
+		Environment: cast.ToString(getOrReturnDefault("ENVIRONMENT", "development")),
+		Host:        cast.ToString(getOrReturnDefault("HOST", "localhost")),
+		Port:        cast.ToInt(getOrReturnDefault("PORT", 8080)),
 
 		PostgresHost:     cast.ToString(getOrReturnDefault("POSTGRES_HOST", "localhost")),
 		PostgresPort:     cast.ToInt(getOrReturnDefault("POSTGRES_PORT", 5432)),

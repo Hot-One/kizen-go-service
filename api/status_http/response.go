@@ -13,6 +13,17 @@ type Response struct {
 	Data        any    `json:"data"`
 }
 
+func NotFound(c *gin.Context, data any) {
+	c.JSON(
+		http.StatusNotFound,
+		Response{
+			Status:      NotFoundStatus.Status,
+			Description: NotFoundStatus.Description,
+			Data:        data,
+		},
+	)
+}
+
 func BadRequest(c *gin.Context, data any) {
 	c.JSON(
 		http.StatusBadRequest,

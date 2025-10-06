@@ -11,13 +11,15 @@ type StorageInterface interface {
 	Close() error
 
 	Sms() repo.SmsInterface
+	User() repo.UserInterface
 }
 
 type storage struct {
 	db  *gorm.DB
 	log logger.Logger
 
-	smsStorage repo.SmsInterface
+	smsStorage  repo.SmsInterface
+	userStorage repo.UserInterface
 }
 
 func NewStorage(db *gorm.DB, log logger.Logger) StorageInterface {
@@ -42,4 +44,12 @@ func (s *storage) Sms() repo.SmsInterface {
 	}
 
 	return s.smsStorage
+}
+
+func (s *storage) User() repo.UserInterface {
+	if s.userStorage == nil {
+		s.userStorage = postgres.NewUserStorage(s.db, s.log)
+	}
+
+	return s.userStorage
 }

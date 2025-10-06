@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/Hot-One/kizen-go-service/api/docs"
 	"github.com/Hot-One/kizen-go-service/api/handler/sms"
+	"github.com/Hot-One/kizen-go-service/api/handler/user"
 	"github.com/Hot-One/kizen-go-service/config"
 	"github.com/Hot-One/kizen-go-service/pkg/logger"
 	"github.com/Hot-One/kizen-go-service/storage"
@@ -36,6 +37,7 @@ func SetUpRouter(cfg config.Config, log logger.Logger, strg storage.StorageInter
 	v1 := r.Group("/v1")
 	{
 		sms.NewHandler(v1, option.cfg, option.log, option.strg.Sms())
+		user.NewHandler(v1, *option.cfg, option.log, option.strg.User())
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

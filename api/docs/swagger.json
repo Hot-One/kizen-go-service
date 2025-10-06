@@ -37,31 +37,19 @@
                     "201": {
                         "description": "Successful operation",
                         "schema": {
-<<<<<<< HEAD
                             "$ref": "#/definitions/github_com_Hot-One_kizen-go-service_pkg_pg.Id"
-=======
-                            "$ref": "#/definitions/pg.Id"
->>>>>>> badfe86e30cb15f2474dc153d7bc99d30998ae6a
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-<<<<<<< HEAD
                             "$ref": "#/definitions/github_com_Hot-One_kizen-go-service_api_status_http.Response"
-=======
-                            "$ref": "#/definitions/statushttp.Response"
->>>>>>> badfe86e30cb15f2474dc153d7bc99d30998ae6a
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-<<<<<<< HEAD
                             "$ref": "#/definitions/github_com_Hot-One_kizen-go-service_api_status_http.Response"
-=======
-                            "$ref": "#/definitions/statushttp.Response"
->>>>>>> badfe86e30cb15f2474dc153d7bc99d30998ae6a
                         }
                     }
                 }
@@ -84,10 +72,6 @@
                 "parameters": [
                     {
                         "type": "integer",
-<<<<<<< HEAD
-=======
-                        "format": "int64",
->>>>>>> badfe86e30cb15f2474dc153d7bc99d30998ae6a
                         "description": "Id",
                         "name": "id",
                         "in": "path",
@@ -105,31 +89,19 @@
                     "200": {
                         "description": "Successful operation",
                         "schema": {
-<<<<<<< HEAD
                             "$ref": "#/definitions/github_com_Hot-One_kizen-go-service_api_status_http.Response"
-=======
-                            "$ref": "#/definitions/statushttp.Response"
->>>>>>> badfe86e30cb15f2474dc153d7bc99d30998ae6a
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-<<<<<<< HEAD
                             "$ref": "#/definitions/github_com_Hot-One_kizen-go-service_api_status_http.Response"
-=======
-                            "$ref": "#/definitions/statushttp.Response"
->>>>>>> badfe86e30cb15f2474dc153d7bc99d30998ae6a
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-<<<<<<< HEAD
                             "$ref": "#/definitions/github_com_Hot-One_kizen-go-service_api_status_http.Response"
-=======
-                            "$ref": "#/definitions/statushttp.Response"
->>>>>>> badfe86e30cb15f2474dc153d7bc99d30998ae6a
                         }
                     }
                 }
@@ -152,19 +124,7 @@
                 }
             }
         },
-<<<<<<< HEAD
         "github_com_Hot-One_kizen-go-service_api_status_http.Response": {
-=======
-        "pg.Id": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer"
-                }
-            }
-        },
-        "statushttp.Response": {
->>>>>>> badfe86e30cb15f2474dc153d7bc99d30998ae6a
             "type": "object",
             "properties": {
                 "data": {},
@@ -175,7 +135,6 @@
                     "type": "string"
                 }
             }
-<<<<<<< HEAD
         },
         "github_com_Hot-One_kizen-go-service_pkg_pg.Id": {
             "type": "object",
@@ -184,8 +143,6 @@
                     "type": "integer"
                 }
             }
-=======
->>>>>>> badfe86e30cb15f2474dc153d7bc99d30998ae6a
         }
     },
     "securityDefinitions": {

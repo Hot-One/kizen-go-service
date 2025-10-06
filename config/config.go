@@ -17,6 +17,11 @@ type Config struct {
 	PostgresUser     string
 	PostgresPassword string
 	PostgresDatabase string
+
+	EmailHost     string
+	EmailPort     int
+	EmailUser     string
+	EmailPassword string
 }
 
 func Load() Config {
@@ -28,9 +33,14 @@ func Load() Config {
 
 		PostgresHost:     cast.ToString(getOrReturnDefault("POSTGRES_HOST", "localhost")),
 		PostgresPort:     cast.ToInt(getOrReturnDefault("POSTGRES_PORT", 5432)),
-		PostgresUser:     cast.ToString(getOrReturnDefault("POSTGRES_USER", "postgres")),
-		PostgresPassword: cast.ToString(getOrReturnDefault("POSTGRES_PASSWORD", "postgres")),
+		PostgresUser:     cast.ToString(getOrReturnDefault("POSTGRES_USER", "kizen")),
+		PostgresPassword: cast.ToString(getOrReturnDefault("POSTGRES_PASSWORD", "kizen")),
 		PostgresDatabase: cast.ToString(getOrReturnDefault("POSTGRES_DATABASE", "kizen")),
+
+		EmailHost:     cast.ToString(getOrReturnDefault("EMAIL_HOST", "smtp.example.com")),
+		EmailPort:     cast.ToInt(getOrReturnDefault("EMAIL_PORT", 587)),
+		EmailUser:     cast.ToString(getOrReturnDefault("EMAIL_USER", "abulbositkabilov1@gmail.com")),
+		EmailPassword: cast.ToString(getOrReturnDefault("EMAIL_PASSWORD", "ouea lhte rhjw spcn")),
 	}
 }
 

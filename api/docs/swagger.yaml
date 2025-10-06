@@ -1,0 +1,103 @@
+basePath: /v1
+definitions:
+  SendSms:
+    properties:
+      type:
+        type: string
+      value:
+        type: string
+    required:
+    - type
+    - value
+    type: object
+  github_com_Hot-One_kizen-go-service_api_status_http.Response:
+    properties:
+      data: {}
+      description:
+        type: string
+      status:
+        type: string
+    type: object
+  github_com_Hot-One_kizen-go-service_pkg_pg.Id:
+    properties:
+      id:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: API for Kizen application
+  title: Kizen API
+  version: "1.0"
+paths:
+  /sms/send:
+    post:
+      consumes:
+      - application/json
+      description: send-sms
+      operationId: send-sms
+      parameters:
+      - description: Request body
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/SendSms'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/github_com_Hot-One_kizen-go-service_pkg_pg.Id'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_Hot-One_kizen-go-service_api_status_http.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_Hot-One_kizen-go-service_api_status_http.Response'
+      summary: send-sms
+      tags:
+      - Sms
+  /sms/verify/{id}:
+    get:
+      consumes:
+      - application/json
+      description: verify-sms
+      operationId: verify-sms
+      parameters:
+      - description: Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Code
+        in: query
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/github_com_Hot-One_kizen-go-service_api_status_http.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_Hot-One_kizen-go-service_api_status_http.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_Hot-One_kizen-go-service_api_status_http.Response'
+      summary: verify-sms
+      tags:
+      - Sms
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

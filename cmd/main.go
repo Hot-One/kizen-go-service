@@ -13,6 +13,13 @@ import (
 	gormLog "gorm.io/gorm/logger"
 )
 
+// @title Kizen API
+// @version 1.0
+// @description API for Kizen application
+// @BasePath /v1
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
 func main() {
 	var (
 		cfg         = config.Load()
@@ -59,7 +66,7 @@ func main() {
 	}
 
 	var storage = storage.NewStorage(postgres, log)
-	var server = api.SetUpRouter(&cfg, log, storage)
+	var server = api.SetUpRouter(cfg, log, storage)
 
 	if err := server.Run(fmt.Sprintf(":%d", cfg.Port)); err != nil {
 		log.Error("Failed to run server", logger.Error(err))

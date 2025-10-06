@@ -4,16 +4,9 @@ run:
 swag-install:
 	go install github.com/swaggo/swag/cmd/swag@latest
 
-swag_init:
-	@if ! command -v swag >/dev/null 2>&1; then \
-		echo "Installing swag..."; \
-		go install github.com/swaggo/swag/cmd/swag@latest; \
-	fi
-	@if command -v swag >/dev/null 2>&1; then \
-		swag init -g api/router.go -o api/docs --parseVendor; \
-	else \
-		$(shell go env GOPATH)/bin/swag init -g api/router.go -o api/docs --parseVendor; \
-	fi
+swag-init:
+	swag init -g cmd/main.go -o api/docs --parseDependency --parseInternal
+
 
 # Docker commands
 docker-build:
@@ -22,6 +15,7 @@ docker-build:
 docker-run:
 	docker run -p 8080:8080 --env-file .env kizen-go-service
 
+# Docker Compose commands
 docker-up:
 	docker-compose up -d
 
@@ -34,6 +28,24 @@ docker-logs:
 docker-rebuild:
 	docker-compose down && docker-compose build --no-cache && docker-compose up -d
 
+# Development commands
+dev-up:
+	docker-compose -f docker-compose.dev.yml up -d
+
+dev-down:
+	docker-compose -f docker-compose.dev.yml down
+
+dev-logs:
+	docker-compose -f docker-compose.dev.yml logs -f
+
+# Database commands
+db-migrate:
+	docker-compose exec kizen-service ./main migrate
+
+db-seed:
+	docker-compose exec kizen-service ./main seed
+
+# Cleanup
 clean:
 	docker-compose down -v
 	docker system prune -f

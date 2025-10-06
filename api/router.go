@@ -1,14 +1,15 @@
 package api
 
 import (
+	"github.com/Hot-One/kizen-go-service/api/docs"
 	"github.com/Hot-One/kizen-go-service/api/handler/sms"
 	"github.com/Hot-One/kizen-go-service/config"
 	"github.com/Hot-One/kizen-go-service/pkg/logger"
 	"github.com/Hot-One/kizen-go-service/storage"
 	"github.com/gin-gonic/gin"
 
-	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 type router struct {
@@ -17,23 +18,18 @@ type router struct {
 	strg storage.StorageInterface
 }
 
-// @title Kizen API
-// @version 1.0
-// @description API for Kizen application
-// @BasePath /v1
-// @securityDefinitions.apikey BearerAuth
-// @in header
-// @name Authorization
-func SetUpRouter(cfg *config.Config, log logger.Logger, strg storage.StorageInterface) *gin.Engine {
+func SetUpRouter(cfg config.Config, log logger.Logger, strg storage.StorageInterface) *gin.Engine {
 	var (
-		r          = gin.Default()
-		swaggerUrl = ginSwagger.URL("/swagger/doc.json")
-		option     = router{
-			cfg:  cfg,
+		r      = gin.Default()
+		option = router{
+			cfg:  &cfg,
 			log:  log,
 			strg: strg,
 		}
 	)
+
+	docs.SwaggerInfo.Title = cfg.ServiceName
+	docs.SwaggerInfo.Schemes = []string{"http"}
 
 	r.Use(gin.Recovery(), gin.Logger(), customCORSMiddleware())
 
@@ -42,8 +38,7 @@ func SetUpRouter(cfg *config.Config, log logger.Logger, strg storage.StorageInte
 		sms.NewHandler(v1, option.cfg, option.log, option.strg.Sms())
 	}
 
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, swaggerUrl))
-
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return r
 }
 
